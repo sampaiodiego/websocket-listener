@@ -3,8 +3,9 @@ FROM node:22-alpine
 COPY . .
 
 ENV NODE_ENV=production \
-    DEBUG=false
+    DEBUG=false \
+    MODE=client
 
 RUN npm install
 
-CMD ["node", "index.js"]
+ENTRYPOINT ["./run.sh"]
