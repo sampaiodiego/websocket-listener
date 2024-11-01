@@ -33,14 +33,16 @@ function websocketListener(url) {
 
 	ws.on('error', (err) => {
 		error('ERROR', err);
-		websocketListener(url);
+		ws.removeAllListeners();
+		setTimeout(() => websocketListener(url), 5000);
 	});
 
 	// ws.onerror((...err) => { error('onerror', ...err); });
 	// ws.onclose((...args) => { log('onclose', ...args); });
 	ws.on('close', (code, reason) => {
 		error('CLOSE', code, reason.toString());
-		websocketListener(url);
+		ws.removeAllListeners();
+		setTimeout(() => websocketListener(url), 5000);
 	});
 
 	ws.on('open', function open() {
